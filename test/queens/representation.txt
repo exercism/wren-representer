@@ -1,0 +1,24 @@
+class @IDENT1@ { static @IDENT2@ { 0. .. 8 } static @IDENT3@ ( @IDENT4@ 
+, @IDENT5@ ) { @IDENT4@ . join ( "," ) == @IDENT5@ . join ( "," ) } 
+static @IDENT6@ ( @IDENT4@ ) { ( @IDENT2@ . contains ( @IDENT4@ [ 0 ] 
+) && @IDENT2@ . contains ( @IDENT4@ [ 1 ] ) ) } } var @IDENT7@ = { "black" 
+: [ 0 , 3 ] , "white" : [ 7 , 3 ] } class @IDENT8@ { construct 
+new ( @IDENT9@ ) { @IDENT10@ = @IDENT9@ [ "white" ] || @IDENT7@ [ "white" 
+] @IDENT11@ = @IDENT9@ [ "black" ] || @IDENT7@ [ "black" ] @IDENT12@ 
+( ) } static new ( ) { @IDENT8@ . new ( { } ) } @IDENT13@ { @IDENT10@ 
+} @IDENT14@ { @IDENT11@ } @IDENT12@ ( ) { @IDENT15@ ( @IDENT13@ 
+) @IDENT15@ ( @IDENT14@ ) if ( @IDENT1@ . sameSquare ( @IDENT13@ , 
+@IDENT14@ ) ) { Fiber . abort ( "Queens cannot share the same space" 
+) } } @IDENT15@ ( @IDENT16@ ) { if ( ! @IDENT1@ . contains ( @IDENT16@ 
+) ) Fiber . abort ( "Queen must be placed on the board" ) } @IDENT17@ 
+( @IDENT18@ ) { if ( @IDENT1@ . sameSquare ( @IDENT18@ , @IDENT13@ 
+) ) return "W" if ( @IDENT1@ . sameSquare ( @IDENT18@ , @IDENT14@ ) 
+) return "B" return "_" } @IDENT19@ { var @IDENT20@ = "" for ( @IDENT21@ 
+in @IDENT1@ . size ) { for ( @IDENT22@ in @IDENT1@ . size ) { @IDENT20@ 
+= @IDENT20@ + @IDENT17@ ( [ @IDENT21@ , @IDENT22@ ] ) + " " } 
+@IDENT20@ = @IDENT20@ . trim ( ) + "\n" } return @IDENT20@ . trim ( ) 
+} @IDENT23@ { @IDENT13@ [ 0 ] == @IDENT14@ [ 0 ] } @IDENT24@ { @IDENT13@ 
+[ 1 ] == @IDENT14@ [ 1 ] } @IDENT25@ { ( @IDENT14@ [ 0 ] - @IDENT13@ 
+[ 0 ] ) . abs == ( @IDENT14@ [ 1 ] - @IDENT13@ [ 1 ] ) . abs } @IDENT26@ 
+{ @IDENT23@ || @IDENT24@ || @IDENT25@ } }
+----

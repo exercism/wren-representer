@@ -1,0 +1,28 @@
+{
+  "name": "@exercism/wren-representer",
+  "version": "0.1.0",
+  "description": "Exercism Wren Representer",
+  "main": "index.js",
+  "scripts": {
+    "test": "./tools/run-tests.sh",
+    "rebuild": "./tools/run-tests.sh --rebuild"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exercism/wren-representer.git"
+  },
+  "author": "Josh Goebel <hello@joshgoebel.com>",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/exercism/wren-representer/issues"
+  },
+  "homepage": "https://github.com/exercism/wren-representer#readme",
+  "dependencies": {
+    "@exercism/codemirror-lang-wren": "^0.5.0",
+    "glob": "^7.1.7"
+  },
+  "devDependencies": {
+    "jest": "^27.0.1"
+  }
+}
