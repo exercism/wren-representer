@@ -4,7 +4,7 @@ export function flip(obj) {
 
 export const walkTree = (tree, data, visitFn) => {
   let cursor = tree.topNode.cursor;
-  walkTree_(cursor, -1, visitFn);
+  return walkTree_(cursor, -1, visitFn);
 
   function walkTree_(cursor, depth = 0, visitFn) {
     var node = {
@@ -15,11 +15,12 @@ export const walkTree = (tree, data, visitFn) => {
       from: cursor.from,
       to: cursor.to,
       get code() {
-        return data.slice(cursor.from, cursor.to)
+        return data.slice(this.from, this.to)
       }
     }
     var leaf = (cursor.firstChild()==false);
     node.leaf = leaf
+    // console.log(node.name, node.code)
     visitFn(node);
     while (!leaf && true) {
       node.children.push(walkTree_(cursor, depth + 1, visitFn));

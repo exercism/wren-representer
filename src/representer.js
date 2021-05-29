@@ -1,28 +1,26 @@
 #!/usr/bin/env node
 import fs from "fs";
-import { wrenLanguage } from "@exercism/codemirror-lang-wren";
+import { wrenLanguage, lezerParser } from "@exercism/codemirror-lang-wren";
 import { walkTree, flip } from "./lib.js"
 import path from "path";
 import glob from "glob";
 
-const parser = wrenLanguage.parser
-
 let [,,slug, input, output] = [...process.argv];
-
-let results = path.join(output, "representation.txt")
-let mapping = path.join(output, "mapping.json")
 
 const BUILT_INS = ["Bool","Class","Fiber","Fn", "List","Map","Null","Num","Object","Range","Sequence","String", "System"]
 const IDENTIFIERS = ["VariableName","ClassMethodName","ClassName","VariableDefinition"]
 const LINE_LENGTH = 70
 
+const fake = (x) => {
+  return {name: x, code: x, leaf: true, children: []}
+}
 class Representation {
   constructor(file, id = 0) {
     this.file = file;
     this.id = id;
     this.replacements = Object.create(null);
     this.result = "";
-    this.last = 0;
+    // this.last = 0;
     this.cursor = LINE_LENGTH;
   }
   replacementFor(name) {
@@ -36,34 +34,60 @@ class Representation {
   process() {
     let data = fs.readFileSync(this.file).toString();
     this.code = data
-    let tree = parser.parse(data);
-    walkTree(tree, data, this.visitNode.bind(this));
+    let tree = lezerParser.parse(data);
+    var node = walkTree(tree, data, () => {});
+    this.walk(node, this.visitNode.bind(this))
     this.result = this.result.trim();
     return this;
   }
 
+
+  rewriteObject(node) {
+    var props = node.children
+      .filter(x => x.name == "Property")
+      .sort((a,b) => a.children[0].code.localeCompare(b.children[0].code) )
+    node.children = [fake("{"),...props,fake("}")]
+  }
+  walk(node, fn) {
+    fn(node)
+    if (node.name=="ObjectExpression") { this.rewriteObject(node) }
+    // console.log("children", node.children.map(x => [x.name, x.code]))
+    // console.log(node.children[0])
+    if (!node.leaf) node.children.forEach(x => this.walk(x, fn))
+  }
+
   rewrite(code, nodeName) {
+    let name = nodeName
     if (nodeName=="ClassMethodName" && code=="new") { return code }
     if (IDENTIFIERS.includes(nodeName)) {
-      let name = this.replacementFor(code) ;
+      name = this.replacementFor(code) ;
       return name
     } else {
       return code
     }
   }
 
+  addLineBreak(node) {
+    // console.log(node.name)
+    return node.name.endsWith("Declaration") ||
+    node.name.endsWith("Statement") ||
+    node.name == "Block"
+  }
   visitNode(node) {
     if (node.name=="Script") return;
+    if (this.addLineBreak(node)) { this.result += "\n" }
     if (node.leaf) {
       const rewritten = this.rewrite(node.code, node.name) + " "
       this.result += rewritten
       // if (this.code.slice(this.last, node.from).includes("\n")) {
-      if (this.result.length > this.cursor) {
-        this.result += "\n"
-        // this.last = node.to
-        this.cursor += LINE_LENGTH
-      }
+
+      // if (this.result.length > this.cursor) {
+      //   this.result += "\n"
+      //   // this.last = node.to
+      //   this.cursor += LINE_LENGTH
+      // }
     }
+
   }
 }
 
@@ -78,6 +102,7 @@ files.forEach(file => {
   id = r.id
 })
 
-// console.log(out)
+let results = path.join(output, "representation.txt")
+let mapping = path.join(output, "mapping.json")
 fs.writeFileSync(results, out)
 fs.writeFileSync(mapping, JSON.stringify(flip(mappings),null,2))

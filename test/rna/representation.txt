@@ -1,6 +1,10 @@
 var @IDENT1@ = [ 1 , 2 , 3 ]
 ----
-var @IDENT2@ = { "G" : "C" , "C" : "G" , "T" : "A" , "A" : "U" } class 
-@IDENT3@ { static @IDENT4@ ( @IDENT5@ ) { return @IDENT5@ . map { | @IDENT6@ 
-| @IDENT2@ [ @IDENT6@ ] } . join ( "" ) } }
+var @IDENT2@ = { "G" : "C" , "C" : "G" , "T" : "A" , "A" : "U" } 
+class @IDENT3@ { 
+static @IDENT4@ ( @IDENT5@ ) 
+{ 
+return 
+@IDENT5@ . map { | @IDENT6@ | 
+@IDENT2@ [ @IDENT6@ ] } . join ( "" ) } }
 ----
