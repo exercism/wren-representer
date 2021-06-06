@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import fs from "fs";
-import { flip } from "./lib.js"
+import { flip } from "./lib"
 import path from "path";
 import glob from "glob";
-import { Representation } from "./representation.js";
+import { Representation } from "./representation";
 
-const [,,slug, input, output] = [...process.argv];
+const [,,_slug, input, output] = [...process.argv];
 
 let out = ""
 let id = 1

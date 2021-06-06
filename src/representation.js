@@ -1,6 +1,6 @@
 import fs from "fs";
 import { lezerParser } from "@exercism/codemirror-lang-wren";
-import { walkTree, sortOnly } from "./lib.js"
+import { walkTree, sortOnly } from "./lib"
 
 // class names that are part of the core language that we do not need to replace
 // with placeholder identifiers
@@ -40,20 +40,20 @@ export class Representation {
   }
 
   normalizeObject(node) {
-    sortOnly(node.children, x => x.name == "Property", (a,b) => {
+    sortOnly(node.children, x => x.name === "Property", (a,b) => {
       return a.children[0].code.localeCompare(b.children[0].code)
     } )
   }
 
   walk(node, fn) {
     fn(node)
-    if (node.name=="ObjectExpression") { this.normalizeObject(node) }
+    if (node.name === "ObjectExpression") { this.normalizeObject(node) }
     // console.log("children", node.children.map(x => [x.name, x.code]))
     if (!node.leaf) node.children.forEach(x => this.walk(x, fn))
   }
 
   rewrite(code, nodeName) {
-    if (nodeName=="ClassMethodName" && code=="new") { return code }
+    if (nodeName === "ClassMethodName" && code === "new") { return code }
     if (!IDENTIFIER_NODES.includes(nodeName)) { return code };
 
     return this.replacementFor(code);
@@ -62,18 +62,18 @@ export class Representation {
   addLineBreakBefore(node) {
     return node.name.endsWith("Declaration") ||
     node.name.endsWith("Statement") ||
-    node.name == "Block"
+    node.name === "Block"
   }
 
   textContentBetween(last, current) {
     let si = last ? last.to : 0;
     let fi = current.from;
     let data = this.code.slice(si,fi)
-    if (data.trim() != "") return data;
+    if (data.trim() !== "") return data;
   }
 
   visitNode(node) {
-    if (node.name=="Script") return;
+    if (node.name === "Script") return;
     if (this.addLineBreakBefore(node)) { this.result += "\n" }
     if (node.leaf) {
       const rewritten = this.rewrite(node.code, node.name) + " "

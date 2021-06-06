@@ -1,0 +1,28 @@
+{
+    "root": true,
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "requireConfigFile": false,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "modules": true
+      }
+    },
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "plugins": ["import"],
+    "extends": [
+      "eslint:recommended",
+      "@exercism/eslint-config-javascript/maintainers",
+      "prettier",
+      "plugin:import/errors",
+      "plugin:import/warnings"
+    ],
+    "rules": {
+      "array-callback-return": "off",
+      "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],
+      "import/no-unresolved": "off"
+    }
+  }
