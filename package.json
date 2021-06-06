@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/exercism/wren-representer#readme",
   "dependencies": {
-    "@exercism/codemirror-lang-wren": "^0.5.0",
+    "@exercism/codemirror-lang-wren":"file:/Users/jgoebel/git/codemirror/base",
     "glob": "^7.1.7"
   },
   "devDependencies": {

@@ -2,6 +2,20 @@ export function flip(obj) {
   return Object.assign({}, ...Object.entries(obj).map(([a,b]) => ({ [b]: a })))
 }
 
+export const sortOnly = (list, filterFn, sortFn) => {
+  let positions = []
+  let items = list.filter((x,i) => {
+    let r = filterFn(x)
+    if (r) positions.push(i);
+    return r
+  });
+  items = items.sort(sortFn);
+  positions.forEach((position, i) => {
+    list[position] = items[i];
+  })
+  return list
+}
+
 export const walkTree = (tree, data, visitFn) => {
   let cursor = tree.topNode.cursor;
   return walkTree_(cursor, -1, visitFn);
