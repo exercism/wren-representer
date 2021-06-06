@@ -12,7 +12,7 @@
       "es6": true,
       "node": true
     },
-    "plugins": ["import"],
+    "plugins": ["import","prettier"],
     "extends": [
       "eslint:recommended",
       "@exercism/eslint-config-javascript/maintainers",
@@ -21,8 +21,10 @@
       "plugin:import/warnings"
     ],
     "rules": {
+      "prettier/prettier": "warn",
       "array-callback-return": "off",
       "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],
-      "import/no-unresolved": "off"
+      "import/no-unresolved": "off",
+      "import/extensions": "off"
     }
   }
