@@ -31,6 +31,15 @@ const IDENTIFIER_NODES = [
   'VariableDefinition',
 ]
 
+const nodeWithin = (node, type) => {
+  let n = node
+  while (n.parent) {
+    if (n.parent.name === type) {
+      return true
+    }
+    n = n.parent
+  }
+}
 export class Representation {
   constructor(file, id = 0) {
     this.file = file
@@ -48,10 +57,47 @@ export class Representation {
     return this.replacements[name]
   }
 
+  // this is needed to add back text nodes inside of strings
+  // which otherwise aren't part of the tree
+  addTextNodes(tree) {
+    if (tree.children.length === 0) return
+    let last = null
+
+    let kids = []
+    // console.log(`children for ${tree.name}`, tree.children)
+    tree.children.forEach((child) => {
+      let _last = last
+      last = child.to
+
+      if (_last && child.from > _last) {
+        let missing = this.code.slice(_last, child.from)
+        if (missing.trim() !== '') {
+          // console.log(`'${missing}'`)
+          let node = {
+            name: 'text',
+            from: _last,
+            parent: tree,
+            children: [],
+            to: child.from,
+            code: missing,
+            leaf: true,
+          }
+          kids.push(node)
+        }
+      }
+
+      last = child.to
+      kids.push(child)
+      this.addTextNodes(child)
+    })
+    tree.children = kids
+  }
+
   process() {
     this.code = fs.readFileSync(this.file).toString()
     let tree = lezerParser.parse(this.code)
     var node = walkTree(tree, this.code, () => {})
+    this.addTextNodes(node)
     this.walk(node, this.visitNode.bind(this))
     this.result = this.result.trim()
     return this
@@ -108,11 +154,12 @@ export class Representation {
       this.result += '\n'
     }
     if (node.leaf) {
-      const rewritten = this.rewrite(node.code, node.name) + ' '
-      let text = this.textContentBetween(this.lastNode, node)
-      if (text) {
-        this.result += text
-      }
+      let rewritten = this.rewrite(node.code, node.name)
+      rewritten += ' '
+      // let text = this.textContentBetween(this.lastNode, node)
+      // if (text) {
+      //   this.result += text
+      // }
       this.result += rewritten
       this.lastNode = node
     }

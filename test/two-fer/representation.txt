@@ -2,9 +2,9 @@ class @IDENT1@ {
 static @IDENT2@ ( ) 
 { 
 return 
-"One for you, one for me." } 
+" One for you, one for me. " } 
 static @IDENT2@ ( @IDENT3@ ) 
 { 
 return 
-"One for %(name), one for me." } }
+" One for  %( @IDENT3@ ) , one for me. " } }
 ----

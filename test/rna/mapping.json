@@ -1,8 +1,8 @@
 {
-  "@IDENT1@": "LIB",
-  "@IDENT2@": "DNA_TO_RNA",
-  "@IDENT3@": "DNA",
-  "@IDENT4@": "toRNA",
-  "@IDENT5@": "strand",
-  "@IDENT6@": "x"
+  "@IDENT1@": "DNA_TO_RNA",
+  "@IDENT2@": "DNA",
+  "@IDENT3@": "toRNA",
+  "@IDENT4@": "strand",
+  "@IDENT5@": "x",
+  "@IDENT6@": "LIB"
 }

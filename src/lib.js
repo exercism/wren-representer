@@ -18,12 +18,14 @@ export const sortOnly = (list, filterFn, sortFn) => {
 
 function walkTree_(cursor, data, depth = 0, visitFn = null) {
   var node = {
+    parent: null,
     type: cursor.type,
     name: cursor.name,
     children: [],
     depth: depth,
     from: cursor.from,
     to: cursor.to,
+    // code: data.slice(cursor.from, cursor.to),
     get code() {
       return data.slice(this.from, this.to)
     },
@@ -36,6 +38,7 @@ function walkTree_(cursor, data, depth = 0, visitFn = null) {
     node.children.push(walkTree_(cursor, data, depth + 1, visitFn))
     if (!cursor.nextSibling()) break
   }
+  node.children.forEach((n) => n.parent = node)
   if (!leaf) cursor.parent()
   return node
 }
