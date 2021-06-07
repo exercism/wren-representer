@@ -1,0 +1,7 @@
+{
+    "files": {
+      "solution": ["rna.wren"],
+      "test": ["rna.spec.wren"],
+      "example": [".meta/proof.ci.wren"]
+    }
+  }

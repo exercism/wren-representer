@@ -1,0 +1,1 @@
+var ALPHA = ["A","B","C"]

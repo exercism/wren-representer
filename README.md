@@ -19,7 +19,7 @@ The Wren Representer takes input Wren source and generates a normalized represen
 - Method dispatch is not currently normalized
 - Known system classes (`String`, `Num`, etc) are left intact
 - The method `new` is always left intact as a convention
-- Multiple files are separated by `---` and ordered by filename
+- Multiple files are separated by `---` and ordered by filename (with the main solution file always leading)
 
 #### Why not use an AST?
 

@@ -1,0 +1,7 @@
+{
+    "files": {
+      "solution": ["two-fer.wren"],
+      "test": ["two-fer.spec.wren"],
+      "example": [".meta/proof.ci.wren"]
+    }
+  }

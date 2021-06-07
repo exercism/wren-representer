@@ -1,0 +1,7 @@
+{
+    "files": {
+      "solution": ["queen_attack.wren"],
+      "test": ["queen_attack.spec.wren"],
+      "example": [".meta/proof.ci.wren"]
+    }
+}
