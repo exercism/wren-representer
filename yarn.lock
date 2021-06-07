@@ -405,10 +405,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@exercism/codemirror-lang-wren@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@exercism/codemirror-lang-wren/-/codemirror-lang-wren-0.6.0.tgz#9332688f09bd3a32f3ece4b6923de005f0752669"
-  integrity sha512-W7doPKMckVP9Bb1oq6ma5kBScsRbvlO2cyq1srPT2HbcZpLUeC/y8lfgy6HQlQVNEzt0Z6oD6zlDpIsmZrfrRg==
+"@exercism/codemirror-lang-wren@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@exercism/codemirror-lang-wren/-/codemirror-lang-wren-0.7.0.tgz#ead63fe83694b1be37485824ee029429b0e3fe9c"
+  integrity sha512-GTU15gjbTJBTurh0BhsBfUj6M+CInvZEbLjHQRa69W8d2CajS/geTPx9YU/3FZvxmAFAUMiLncECVLI9Q35uKw==
   dependencies:
     "@codemirror/autocomplete" "^0.18.5"
     "@codemirror/highlight" "^0.18.4"
