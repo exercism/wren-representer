@@ -6,5 +6,7 @@ return
 @IDENT4@ . map { | @IDENT5@ | 
 @IDENT1@ [ @IDENT5@ ] } . join ( " " ) } }
 ----
-var @IDENT6@ = [ 1 , 2 , 3 ]
+var @IDENT6@ = [ " A " , " B " , " C " ]
+----
+var @IDENT7@ = [ 1 , 2 , 3 ]
 ----

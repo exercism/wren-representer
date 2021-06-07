@@ -4,5 +4,6 @@
   "@IDENT3@": "toRNA",
   "@IDENT4@": "strand",
   "@IDENT5@": "x",
-  "@IDENT6@": "LIB"
+  "@IDENT6@": "ALPHA",
+  "@IDENT7@": "LIB"
 }
