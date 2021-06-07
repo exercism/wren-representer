@@ -31,6 +31,7 @@ const IDENTIFIER_NODES = [
   'VariableDefinition',
 ]
 
+// eslint-disable-next-line no-unused-vars
 const nodeWithin = (node, type) => {
   let n = node
   while (n.parent) {

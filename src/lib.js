@@ -38,7 +38,7 @@ function walkTree_(cursor, data, depth = 0, visitFn = null) {
     node.children.push(walkTree_(cursor, data, depth + 1, visitFn))
     if (!cursor.nextSibling()) break
   }
-  node.children.forEach((n) => n.parent = node)
+  node.children.forEach((n) => (n.parent = node))
   if (!leaf) cursor.parent()
   return node
 }
