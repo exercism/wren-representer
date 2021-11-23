@@ -4,3 +4,7 @@ Dockerfile
 bin/run-in-docker.sh
 tmp
 node_modules
+.appends
+.git
+.gitignore
+.gitattributes
