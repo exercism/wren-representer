@@ -2,9 +2,13 @@
 Dockerfile
 .dockerignore
 bin/run-in-docker.sh
+bin/run-tests-in-docker.sh
+bin/run-tests.sh
 tmp
 node_modules
 .appends
 .git
 .gitignore
 .gitattributes
+samples/
+test/
