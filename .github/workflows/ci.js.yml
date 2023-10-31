@@ -24,7 +24,7 @@ jobs:
       - name: Lint code
         run: yarn lint
 
-  ci:
+  unit_tests:
     runs-on: ubuntu-latest
 
     strategy:
